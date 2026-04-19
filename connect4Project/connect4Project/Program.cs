@@ -2,6 +2,8 @@
 using System;
 namespace connect4Project
 {
+    using System;
+
     class Program
     {
         static void Main(string[] args)
@@ -13,9 +15,13 @@ namespace connect4Project
 
     class Controller
     {
+        private Model model = new Model();
+        private View view = new View();
+
         public void StartGame()
         {
-            // Game flow will go here
+            model.InitializeBoard();
+            view.DisplayBoard(model.Board);
         }
     }
 
@@ -25,7 +31,13 @@ namespace connect4Project
 
         public void InitializeBoard()
         {
-            // Initialize board
+            for (int i = 0; i < 6; i++)
+            {
+                for (int j = 0; j < 7; j++)
+                {
+                    Board[i, j] = '-';
+                }
+            }
         }
     }
 
@@ -41,7 +53,8 @@ namespace connect4Project
     {
         public override int GetMove()
         {
-            return 0;
+            Console.Write("Enter column (1-7): ");
+            return int.Parse(Console.ReadLine());
         }
     }
 
@@ -49,7 +62,19 @@ namespace connect4Project
     {
         public void DisplayBoard(char[,] board)
         {
-            // Display logic here
+            Console.WriteLine();
+
+            for (int i = 0; i < 6; i++)
+            {
+                for (int j = 0; j < 7; j++)
+                {
+                    Console.Write(board[i, j] + " ");
+                }
+                Console.WriteLine();
+            }
+
+            Console.WriteLine("1 2 3 4 5 6 7");
+            Console.WriteLine();
         }
     }
 }
